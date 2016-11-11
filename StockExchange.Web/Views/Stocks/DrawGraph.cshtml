@@ -1,0 +1,45 @@
+﻿<div>
+    @{
+        var myChart = new Chart(width: 600, height: 400)
+            .AddTitle("Last 20 updates")
+            .AddSeries(
+                chartType: "Line",
+                name: "FP",
+                legend: "Company",
+                xValue: (List<string>) Session["Graph_Times"],
+                yValues: (List<decimal>)Session["GraphData_0"])
+            .AddSeries(
+                chartType: "Line",
+                name: "FPL",
+                legend: "Company",
+                xValue: (List<string>)Session["Graph_Times"],
+                yValues: (List<decimal>)Session["GraphData_1"])
+            .AddSeries(
+                chartType: "Line",
+                name: "PGB",
+                legend: "Company",
+                xValue: (List<string>)Session["Graph_Times"],
+                yValues: (List<decimal>)Session["GraphData_2"])
+            .AddSeries(
+                chartType: "Line",
+                name: "FPC",
+                legend: "Company",
+                xValue: (List<string>)Session["Graph_Times"],
+                yValues: (List<decimal>)Session["GraphData_3"])
+            .AddSeries(
+                chartType: "Line",
+                name: "FPA",
+                legend: "Company",
+                xValue: (List<string>)Session["Graph_Times"],
+                yValues: (List<decimal>)Session["GraphData_4"])
+            .AddSeries(
+                chartType: "Line",
+                name: "DL24",
+                legend: "Company",
+                xValue: (List<string>)Session["Graph_Times"],
+                yValues: (List<decimal>)Session["GraphData_5"])
+            .AddLegend("Company", "Company")
+            .Write();
+    }
+</div>
+

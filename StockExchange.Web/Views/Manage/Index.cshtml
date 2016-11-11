@@ -1,0 +1,27 @@
+﻿@model StockExchange.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<div>
+    <h2>@ViewBag.Title</h2>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#walletManageSection">Wallet</a></li>
+        <li><a data-toggle="tab" href="#passwordSection">Password</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="walletManageSection" class="tab-pane active">
+            @Html.Partial("EditWallet", Model.EditWalletViewModel)
+        </div>
+        <div id="passwordSection" class="tab-pane">
+            <h3>Change your password</h3>
+            @Html.Partial("ChangePassword", new StockExchange.Models.ChangePasswordViewModel())
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/manage")
+}
+

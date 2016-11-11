@@ -1,0 +1,44 @@
+﻿@model StockExchange.Models.StocksIndexViewModel
+
+@{
+    ViewBag.Title = "Stocks";
+}
+
+<div id="stocksContent" class="row">
+    @Html.Action("Stocks", Model)
+</div>
+<div class="modal fade" id="stocksModal" tabindex="-1" role="dialog" aria-labelledby="Transaction Dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="stocksModalLabel">Specify the amount</h4>
+            </div>
+            <div class="modal-body">
+                How many <span id="stocksCompanyCode"></span> stocks would you like to <span class="stocksActionLabel"></span>?
+                <form id="stocksModalForm" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" id="stocksAmount" min="1">
+                        </div>
+                        <label for="stocksAmount" class="control-label">Value: <span id="stocksPriceTotal"></span></label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="stocksActionButton"><span class="stocksActionLabel"></span></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        // Add bootstrap tooltips
+        $('[rel=tooltip]').tooltip();
+    </script>
+    @Scripts.Render("~/bundles/stocks")
+}
+

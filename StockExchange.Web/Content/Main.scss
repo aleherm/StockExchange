@@ -1,0 +1,81 @@
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal {
+    dt {
+        white-space: normal;
+    }
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar-nav li {
+    span {
+        color: #9d9d9d;
+        line-height: 20px;
+        display: block;
+        padding: 15px 0;
+    }
+}
+
+/* Size of the only glyphicon used, the 'Manage' cogwheel */
+.glyphicon.glyphicon-cog {
+    font-size: 1.2em;
+}
+
+/* Jumbotron on the 'Home' page*/
+#homeJumbo {
+    margin-top: 30px;
+    height: 50vh;
+    background-image: url('../images/jumbotron.jpg');
+    background-position: -2px;
+    background-size: cover;
+    h1 {
+        color: #236095;
+    }
+}
+/* Make the graph fill the whole width of the table */
+#graph {
+    width: 100%;
+}
+#stocksModalForm {
+    .form-group {
+        margin-top: 7px;
+    }
+}
+#stocksActionButton {
+    text-transform: capitalize;
+}
+dl {
+    margin: 0px;
+}
+.manage-table-wrap {
+    margin: 0px;
+    margin-bottom: 10px;
+}
+.alert {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+/* Fix the bootstrap tooltips not showing */
+.btn[disabled].tooltip-disabled {
+    pointer-events: all;
+}

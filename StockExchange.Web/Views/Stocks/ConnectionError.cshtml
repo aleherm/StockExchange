@@ -1,0 +1,9 @@
+﻿@model StockExchange.Models.ResponseFormat
+
+@{
+    ViewBag.Title = "Error connecting to remote price provider.";
+}
+
+<div class="alert alert-danger">Unable to connect to remote price provider. Please check back later.</div>
+<p><strong>Error:</strong> @Model.message</p>
+

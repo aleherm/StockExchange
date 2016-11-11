@@ -1,0 +1,112 @@
+﻿@model StockExchange.Models.StocksIndexViewModel
+
+@if (Model.Success)
+{
+    <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        @Model.Message
+    </div>
+}
+else
+{
+    if (Model.Message != null)
+    {
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            @Model.Message
+        </div>
+    }
+}
+
+<div class="col-md-6">
+    <h3>Stock prices</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var companyStock in Model.StocksTableData)
+            {
+                <tr>
+                    <td>
+                        @companyStock.Name (@companyStock.Code)
+                    </td>
+                    <td>
+                        @companyStock.Price
+                    </td>
+                    <td class="text-center">
+                        @if (companyStock.NumberOfSiteStocks == 0)
+                        {
+                            <button class="btn btn-primary btn-sm tooltip-disabled" rel="tooltip" data-title="Currently out of stock." disabled>Buy</button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#stocksModal" data-company="@companyStock.Code" data-actionlabel="buy">Buy</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    <img id="graph" src="@Url.Action("DrawGraph")" />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="col-md-6">
+    <h3>My wallet</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Unit price</th>
+                <th>Amount</th>
+                <th>Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var companyStock in Model.StocksTableData)
+            {
+                <tr>
+                    <td>
+                        @companyStock.Name (@companyStock.Code)
+                    </td>
+                    <td id="@companyStock.StocksPriceId">
+                        @companyStock.Price
+                    </td>
+                    <td>
+                        @companyStock.NumberOfStocks
+                    </td>
+                    <td>
+                        @companyStock.Value
+                    </td>
+                    <td class="text-center">
+                        @if (companyStock.NumberOfStocks == 0)
+                        {
+                            <button class="btn btn-primary btn-sm tooltip-disabled" rel="tooltip" data-title="You do not have any @companyStock.Code stocks." disabled>Sell</button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#stocksModal" data-company="@companyStock.Code" data-maxstocks="@companyStock.NumberOfStocks" data-actionlabel="sell">Sell</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr class="spacer"></tr>
+            <tr>
+                <td colspan="5">Account balance: @Model.AccountBalance PLN</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="col-md-12"><p>Data from @Model.PublicationDate</p></div>

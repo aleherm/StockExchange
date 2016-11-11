@@ -1,0 +1,51 @@
+﻿@model StockExchange.Models.EditWalletViewModel
+
+<h3>Your wallet</h3>
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        @Model.Message
+    </div>
+}
+
+@using (Html.BeginForm("EditWallet", "Manage", FormMethod.Post, new { id = "walletForm", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    { Model.ModifiedOwnedStocks = Model.OwnedStocks; }
+    { Model.ModifiedAccountBalance = Model.AccountBalance; }
+
+    if (Model.CompanyCount % 3 != 0)
+    {
+        Model.NumberOfColumns += 1;
+    }
+    <div class="row">
+        @for (var column = 0; column <= (Model.NumberOfColumns - 1); column++)
+        {
+            <div class='col-md-3'>
+                @for (var item = (column * 3); item <= ((column * 3) + 2); item++)
+                {
+                    <div class="form-group">
+                        @Html.Label(Model.OwnedStocks[item].Name, new { @class = "control-label" })
+                        @Html.EditorFor(m => m.ModifiedOwnedStocks[item].Value, new { htmlAttributes = new { @class = "form-control", @Min = "0", @Max = "1000000" } })
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(m => m.ModifiedAccountBalance, new { @class = "control-label" })
+                @Html.EditorFor(m => m.ModifiedAccountBalance, new { htmlAttributes = new { @class = "form-control", @Min = "0", @Max = "1000000" } })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <input type="submit" value="Edit your wallet" class="btn btn-default" />
+        </div>
+    </div>
+}
